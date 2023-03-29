@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-function isStorageExist() /* boolean */ {
+function isStorageExist() {
     if (typeof (Storage) === undefined) {
         alert('Browser kamu tidak mendukung local storage')
         return false;
@@ -33,10 +33,6 @@ document.addEventListener(RENDER_EVENT, function () {
 
 const SAVED_EVENT = 'SIMPAN-PASSWORD';
 const STORAGE_KEY = 'SAVE_PASSWORD_APPS';
-
-document.addEventListener(SAVED_EVENT, function () {
-    console.log(localStorage.getItem(STORAGE_KEY));
-});
 
 function loadDataFromStorage() {
     const serializedData = localStorage.getItem(STORAGE_KEY);
@@ -113,15 +109,6 @@ function makeAccount(accountObject) {
     container.append(deleteButton)
 
     return container;
-}
-
-function findAccount(idAccount) {
-    for (const account of accounts){
-        if (account.id === idAccount) {
-            return account;
-        }
-    }
-    return null;
 }
 
 function findAccountIndex(idAccount) {
