@@ -52,6 +52,7 @@ function saveData() {
         const parsed = JSON.stringify(accounts);
         localStorage.setItem(STORAGE_KEY, parsed);
         document.dispatchEvent(new Event(SAVED_EVENT));
+        alert("Data berhasil disimpan");
     }
 }
 
@@ -127,5 +128,10 @@ function removeAccount(idAccount) {
 
     accounts.splice(targetAccount, 1);
     document.dispatchEvent(new Event(RENDER_EVENT));
-    saveData();
+
+    const parsed = JSON.stringify(accounts);
+    localStorage.setItem(STORAGE_KEY, parsed);
+    document.dispatchEvent(new Event(SAVED_EVENT));
+
+    alert("Data Berhasil dihapus")
 }
