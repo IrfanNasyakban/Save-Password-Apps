@@ -104,6 +104,22 @@ input[type=text] {
     background-size: contain;
 }
 
+.edit-button {
+    width: 40px;
+    height: 40px;
+    background: url('assets/edit.png');
+    background-size: contain;
+    margin-left: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+}
+
+.edit-button:hover {
+    background: url('assets/edit-filled.png');
+    background-size: contain;
+}
+
 footer {
     padding: 20px;
     color: white;

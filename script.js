@@ -101,13 +101,20 @@ function makeAccount(accountObject) {
     container.append(textContainer)
     container.setAttribute('id', `account-${accountObject.id}`)
 
+    const editButton = document.createElement('button');
+    editButton.classList.add('edit-button');
+
     const deleteButton = document.createElement('button')
     deleteButton.classList.add('delete-button')
+
+    editButton.addEventListener('click', function () {
+        editAccount(accountObject.id);
+    });
 
     deleteButton.addEventListener('click', function () {
         removeAccount(accountObject.id)
     })
-    container.append(deleteButton)
+    container.append(editButton, deleteButton)
 
     return container;
 }
@@ -119,6 +126,27 @@ function findAccountIndex(idAccount) {
         }
     }
     return -1;
+}
+
+function editAccount(idAccount) {
+    const targetAccount = findAccountIndex(idAccount);
+
+    const platform = document.getElementById('platform');
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+
+    const data = JSON.parse(window.localStorage.getItem(STORAGE_KEY));
+
+    platform.value = data[targetAccount].platform
+    username.value = data[targetAccount].username
+    password.value = data[targetAccount].password
+
+    accounts.splice(targetAccount, 1);
+    document.dispatchEvent(new Event(RENDER_EVENT));
+
+    const parsed = JSON.stringify(accounts);
+    localStorage.setItem(STORAGE_KEY, parsed);
+    document.dispatchEvent(new Event(SAVED_EVENT));
 }
 
 function removeAccount(idAccount) {
