@@ -83,7 +83,7 @@ function addAccount() {
 }
 
 function makeAccount(accountObject) {
-    const textPlatform = document.createElement('h2')
+    const textPlatform = document.createElement('h3')
     textPlatform.innerText = 'Platform: ' + accountObject.platform;
 
     const textUsername = document.createElement('h3')
@@ -141,12 +141,7 @@ function editAccount(idAccount) {
     username.value = data[targetAccount].username
     password.value = data[targetAccount].password
 
-    accounts.splice(targetAccount, 1);
-    document.dispatchEvent(new Event(RENDER_EVENT));
-
-    const parsed = JSON.stringify(accounts);
-    localStorage.setItem(STORAGE_KEY, parsed);
-    document.dispatchEvent(new Event(SAVED_EVENT));
+    removeAccount(idAccount)
 }
 
 function removeAccount(idAccount) {
@@ -160,6 +155,4 @@ function removeAccount(idAccount) {
     const parsed = JSON.stringify(accounts);
     localStorage.setItem(STORAGE_KEY, parsed);
     document.dispatchEvent(new Event(SAVED_EVENT));
-
-    alert("Data Berhasil dihapus")
 }
